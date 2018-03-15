@@ -11,10 +11,10 @@ package Model;
  */
 public class Customer {
    
-   public String name; 
-   public String document;
-   public String email;
-   public String phone;
+   private String name; 
+   private String document;
+   private String email;
+   private String phone;   
 
     public String getName() {
         return name;
