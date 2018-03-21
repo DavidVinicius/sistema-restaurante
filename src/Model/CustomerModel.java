@@ -55,27 +55,25 @@ public class CustomerModel {
         return customer;
     }
     
-    public static Customer[] where(String field,String arg) throws SQLException
+    public static Customer where(String field,String arg) throws SQLException
     {
-        Customer[] c = null;
+        Customer customer = null;
         
         Connection con        = ConnectionFactory.getConnection();
         PreparedStatement stm = null;
         ResultSet           rs = null;
         try{
-            stm = con.prepareStatement("SELECT count(*) as total FROM "+Table+" WHERE `"+field+"` = ?");            
-            stm.setString(1, arg);
-                    
+            stm = con.prepareStatement("SELECT * FROM "+Table+" WHERE `"+field+"` = ? Limit 1");            
+            stm.setString(1, arg);                    
             rs = stm.executeQuery();
-            rs.next();
-            int total = rs.getInt("total");
-            System.out.println("1 - " + total);
-            /*customer.setName(rs.getString("nome"));
+            
+            rs.next();                        
+            customer.setName(rs.getString("nome"));
             customer.setEmail(rs.getString("email"));
             customer.setDocument(rs.getString("rg"));
-            customer.setPhone(rs.getString("telefone"));*/
+            customer.setPhone(rs.getString("telefone"));
             
-            return c;
+            return customer;
         }catch(SQLException e){
             
             //Logger.getLogger(CustomerModel.class.getName()).log(Level.SEVERE, null, ex);
@@ -95,11 +93,11 @@ public class CustomerModel {
             
             stm = con.prepareStatement("SELECT * FROM "+Table+" WHERE `"+field+"` "+opt+" "+arg);                                                
             rs = stm.executeQuery();            
-            /*rs.last();
-            int total = rs.getRow();*/
-            c = new Customer[2];
+            rs.last();
+            int total = rs.getRow();
+            c = new Customer[total];
             
-            //rs.first();
+            rs.beforeFirst();            
             int i = 0;
             while(rs.next())
             {
