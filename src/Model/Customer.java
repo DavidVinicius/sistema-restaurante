@@ -10,11 +10,26 @@ package Model;
  * @author ht3000052
  */
 public class Customer {
-   
+
+       
    private String name; 
    private String document;
    private String email;
    private String phone;   
+   private boolean exists = false;
+   
+   public Customer(String name,String document, String email,String phone)
+   {
+       this.name     = name;
+       this.document = document;
+       this.email    = email;
+       this.phone    = phone;
+   }      
+   
+   public Customer()
+   {
+       
+   }
 
     public String getName() {
         return name;
@@ -48,7 +63,13 @@ public class Customer {
         this.phone = phone;
     }
 
-    
+    public boolean isExists() {
+        return exists;
+    }
+
+    public void setExists(boolean exists) {
+        this.exists = exists;
+    }
    
    
 }

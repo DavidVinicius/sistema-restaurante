@@ -64,10 +64,20 @@ public class CustomerModelTest {
     @Test
     public void testMethodWhereCustomer() throws SQLException
     {
-        Customer [] c = CustomerModel.where("nome", "LIKE","'%a%'");
+        Customer [] c = CustomerModel.where("name", "LIKE","'%a%'");
         for(int i = 0; i < c.length; i++)
         {
             System.out.println(c[i].getName());
         }
+        
+        assertNotNull("Retornou vazio",c);
+    }
+    
+    @Test
+    public void testMethodWhereEqualsCustomer() throws SQLException
+    {
+        Customer c = CustomerModel.where("name","'Sara'");
+                
+        assertNotNull("Retornou vazio",c);
     }
 }

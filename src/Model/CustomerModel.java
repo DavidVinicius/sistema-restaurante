@@ -19,7 +19,11 @@ import java.util.logging.Logger;
  */
 public class CustomerModel {
    static Customer customer;
-   private static String Table = "`cliente`";
+   private static String Table         = "`customer`";
+   private static String nameField     = "name";
+   private static String emailField    = "email";
+   private static String documentField = "document";
+   private static String phoneField    = "phone";
     
     public CustomerModel()
     {
@@ -39,10 +43,10 @@ public class CustomerModel {
         
             rs = stm.executeQuery();
             rs.next();
-            customer.setName(rs.getString("nome"));
-            customer.setEmail(rs.getString("email"));
-            customer.setDocument(rs.getString("rg"));
-            customer.setPhone(rs.getString("telefone"));
+            customer.setName(rs.getString(nameField));
+            customer.setEmail(rs.getString(emailField));
+            customer.setDocument(rs.getString(documentField));
+            customer.setPhone(rs.getString(phoneField));
             
             return customer;
         }catch(SQLException e){
@@ -57,22 +61,24 @@ public class CustomerModel {
     
     public static Customer where(String field,String arg) throws SQLException
     {
-        Customer customer = null;
+        Customer customer = new Customer();
         
         Connection con        = ConnectionFactory.getConnection();
         PreparedStatement stm = null;
         ResultSet           rs = null;
         try{
-            stm = con.prepareStatement("SELECT * FROM "+Table+" WHERE `"+field+"` = ? Limit 1");            
-            stm.setString(1, arg);                    
-            rs = stm.executeQuery();
+            stm = con.prepareStatement("SELECT * FROM "+Table+" WHERE `"+field+"` = "+arg+" ");     
             
-            rs.next();                        
-            customer.setName(rs.getString("nome"));
-            customer.setEmail(rs.getString("email"));
-            customer.setDocument(rs.getString("rg"));
-            customer.setPhone(rs.getString("telefone"));
+            //System.out.println(stm.toString());
             
+            //stm.setString(1, arg);                    
+            rs = stm.executeQuery();            
+            rs.next();                
+            customer.setName(rs.getString(nameField));
+            customer.setEmail(rs.getString(emailField));
+            customer.setDocument(rs.getString(documentField));
+            customer.setPhone(rs.getString(phoneField));
+            customer.setExists(true);
             return customer;
         }catch(SQLException e){
             
@@ -103,11 +109,11 @@ public class CustomerModel {
             {
                 customer = new Customer();
                 
-                customer.setName(rs.getString("nome"));
-                customer.setEmail(rs.getString("email"));
-                customer.setDocument(rs.getString("rg"));
-                customer.setPhone(rs.getString("telefone"));
-                
+                customer.setName(rs.getString(nameField));
+                customer.setEmail(rs.getString(emailField));
+                customer.setDocument(rs.getString(documentField));
+                customer.setPhone(rs.getString(phoneField));
+                customer.setExists(true);
                 c[i] = customer;
                 i++;
             }
@@ -133,18 +139,14 @@ public class CustomerModel {
         PreparedStatement   stm  = null;
         ResultSet           rs   = null;
         try{
-            stm = con.prepareStatement("INSERT INTO cliente (nome,email,rg,telefone) VALUES (?,?,?,?)");
+            String fields = nameField+","+emailField+","+documentField+","+phoneField;
+            stm = con.prepareStatement("INSERT INTO "+ Table +" ("+fields+") VALUES (?,?,?,?)");
             stm.setString(1,customer.getName());
             stm.setString(2,customer.getEmail());
             stm.setString(3,customer.getDocument());
             stm.setString(4,customer.getPhone());
         
-            stm.executeUpdate();
-            
-           /* customer.setName(rs.getString("nome"));
-            customer.setEmail(rs.getString("email"));
-            customer.setDocument(rs.getString("rg"));
-            customer.setPhone(rs.getString("telefone"));*/
+            stm.executeUpdate();            
             
             return true;
         }catch(SQLException e){
