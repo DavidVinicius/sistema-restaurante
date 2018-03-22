@@ -55,9 +55,9 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="insertEmail" min="-2" pref="388" max="-2" attributes="0"/>
-                                      <Component id="insertCPF" min="-2" pref="388" max="-2" attributes="0"/>
-                                      <Component id="insertName" min="-2" pref="388" max="-2" attributes="0"/>
+                                      <Component id="email" min="-2" pref="388" max="-2" attributes="0"/>
+                                      <Component id="document" min="-2" pref="388" max="-2" attributes="0"/>
+                                      <Component id="name" min="-2" pref="388" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
@@ -66,12 +66,12 @@
                                       <EmptySpace max="32767" attributes="0"/>
                                       <Component id="clearButton" min="-2" pref="100" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
-                                      <Component id="nextButton2" min="-2" pref="100" max="-2" attributes="0"/>
+                                      <Component id="nextButton" min="-2" pref="100" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="insertPhone" min="-2" pref="388" max="-2" attributes="0"/>
+                                      <Component id="phone" min="-2" pref="388" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -89,28 +89,28 @@
                   <EmptySpace min="-2" pref="104" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="insertName" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                      <Component id="name" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="insertCPF" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
+                      <Component id="document" alignment="3" min="-2" pref="22" max="-2" attributes="0"/>
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="insertEmail" min="-2" pref="22" max="-2" attributes="0"/>
+                      <Component id="email" min="-2" pref="22" max="-2" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                      <Component id="insertPhone" min="-2" pref="22" max="-2" attributes="0"/>
+                      <Component id="phone" min="-2" pref="22" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="141" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="backButton" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="clearButton" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="nextButton2" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="nextButton" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
               </Group>
@@ -158,15 +158,15 @@
             <Property name="text" type="java.lang.String" value="Telefone"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="insertName">
+        <Component class="javax.swing.JTextField" name="name">
         </Component>
-        <Component class="javax.swing.JTextField" name="insertCPF">
+        <Component class="javax.swing.JTextField" name="document">
         </Component>
-        <Component class="javax.swing.JTextField" name="insertEmail">
+        <Component class="javax.swing.JTextField" name="email">
         </Component>
-        <Component class="javax.swing.JTextField" name="insertPhone">
+        <Component class="javax.swing.JTextField" name="phone">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="insertPhoneActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="phoneActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="backButton">
@@ -179,10 +179,13 @@
             <Property name="text" type="java.lang.String" value="Apagar"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="nextButton2">
+        <Component class="javax.swing.JButton" name="nextButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pr&#xf3;ximo"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nextButtonActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

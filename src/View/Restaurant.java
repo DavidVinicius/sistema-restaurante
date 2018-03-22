@@ -1,5 +1,11 @@
 package View;
 
+import Model.Customer;
+import Model.CustomerModel;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,7 +17,8 @@ package View;
  * @author a1620746
  */
 public class Restaurant extends javax.swing.JFrame {
-
+    Customer c;
+    Menu m;
     /**
      * Creates new form Restaurant
      */
@@ -104,6 +111,30 @@ public class Restaurant extends javax.swing.JFrame {
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         // TODO add your handling code here:
+        String cpf = cpfText.getText();
+        
+        try {
+            c = CustomerModel.where("rg", cpf);
+            
+            if(c != null)
+            {
+                System.out.println("Existe");
+                Menu m = new Menu();
+                m.setVisible(true);
+                this.setVisible(false);
+                
+            }else{
+                System.out.println("Nao existe");
+                InsertCustomer insert = new InsertCustomer();
+                
+                insert.setVisible(true);
+                this.setVisible(false);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Restaurant.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void cpfTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfTextActionPerformed
