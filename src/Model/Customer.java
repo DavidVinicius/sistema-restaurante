@@ -12,9 +12,9 @@ package Model;
 public class Customer {
 
        
-   private String name; 
+    String name; 
    private String document;
-   private String email;
+   protected String email;
    private String phone;   
    private boolean exists = false;
    
