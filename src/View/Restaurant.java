@@ -1,10 +1,15 @@
 package View;
 
+import Model.Admin.Admin;
+import Model.Admin.AdminModel;
 import Model.Customer;
 import Model.CustomerModel;
+import View.Admin.AdminPanel;
+import com.sun.glass.events.KeyEvent;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -61,6 +66,11 @@ public class Restaurant extends javax.swing.JFrame {
                 cpfTextActionPerformed(evt);
             }
         });
+        cpfText.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                cpfTextKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -108,13 +118,12 @@ public class Restaurant extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-        // TODO add your handling code here:
+    private void login()
+    {
         String cpf = cpfText.getText();
         
         try {
-            c = CustomerModel.where("rg", cpf);
+            c = CustomerModel.where("document", cpf);
             
             if(c != null)
             {
@@ -124,22 +133,83 @@ public class Restaurant extends javax.swing.JFrame {
                 this.setVisible(false);
                 
             }else{
-                System.out.println("Nao existe");
-                InsertCustomer insert = new InsertCustomer();
                 
-                insert.setVisible(true);
-                this.setVisible(false);
+                AdminModel getAdmin = new AdminModel();
+                Admin admin = new Admin();
+                admin = getAdmin.find(cpf);
+                System.out.println(admin.getDocument());
+                if( admin.getDocument() != null)
+                {
+                    String senha = JOptionPane.showInputDialog(null,"Digite sua senha");
+                                        
+                    if (senha != null) {
+                        
+                        if(senha.equals(admin.getPassword()) )
+                        {
+                            System.out.println("Logou");
+                            AdminPanel a = new AdminPanel();
+                            a.setVisible(true);
+                            this.dispose();
+                        }else{
+                            
+                            do{                                
+                               senha = JOptionPane.showInputDialog(null,"Digite sua senha");
+                               
+                               if(senha == null)
+                               {
+                                   break;
+                               }
+                               
+                            }while(!senha.equals(admin.getPassword()) );
+                            
+                            if(senha != null)
+                            {
+                                if(senha.equals(admin.getPassword()))
+                                {
+                                    System.out.println("logou");
+                                    AdminPanel a = new AdminPanel();
+                                    a.setVisible(true);
+                                    //this.setVisible(false);
+                                    this.dispose();
+                                }
+                            }                                                                                    
+                        }
+                    }
+                    
+                }else{
+                    System.out.println("Nao existe");
+                    InsertCustomer insert = new InsertCustomer();
+
+                    insert.setVisible(true);
+                    //this.setVisible(false);
+                    this.dispose();
+                }
+                
+                
             }
             
         } catch (SQLException ex) {
             Logger.getLogger(Restaurant.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
+        // TODO add your handling code here:
+        login();
         
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void cpfTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpfTextActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cpfTextActionPerformed
+
+    private void cpfTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cpfTextKeyPressed
+        // TODO add your handling code here:
+        
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            this.login();
+        }
+    }//GEN-LAST:event_cpfTextKeyPressed
 
     /**
      * @param args the command line arguments

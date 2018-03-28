@@ -13,7 +13,7 @@ CREATE TABLE Customer(
     name varchar(100) not null,
     document varchar(20) unique not null,
     email varchar(100) unique not null,
-    phone varchar(20),    
+    phone varchar(20)  
 );
 
 

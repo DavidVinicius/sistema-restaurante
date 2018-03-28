@@ -80,4 +80,11 @@ public class CustomerModelTest {
                 
         assertNotNull("Retornou vazio",c);
     }
+    
+    @Test
+    public void testCountMethod() throws SQLException
+    {
+      int a = CustomerModel.count();
+        System.out.println(a);
+    }
 }

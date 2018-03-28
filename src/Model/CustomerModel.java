@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @author ht3000052
  */
-public class CustomerModel {
+public class CustomerModel extends Model{
    static Customer customer;
    private static String Table         = "`customer`";
    private static String nameField     = "name";
