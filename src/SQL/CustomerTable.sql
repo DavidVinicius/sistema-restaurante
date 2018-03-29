@@ -14,7 +14,7 @@ CREATE TABLE Customer(
     document varchar(20) unique not null,
     email varchar(100) unique not null,
     phone varchar(20)  
-);
+);            
 
 
 INSERT INTO Customer(name,document,email,phone) VALUES('David','44444444444','email@email.com','18999999999'),('Sara','2222222222','sara@sara.com','77777777777');
