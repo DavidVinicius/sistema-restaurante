@@ -5,11 +5,16 @@
  */
 package View.Admin.Categories;
 
+import Controller.Admin.CategoryValidator;
 import Model.Admin.Category;
 import Model.Admin.CategoryModel;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,21 +26,28 @@ public class Categories extends javax.swing.JFrame {
     /**
      * Creates new form Categories
      */
-    public Categories() throws SQLException {
-        initComponents();
+    
+    public void updateTable() throws SQLException
+    {
         tableModel                  = (DefaultTableModel) CategoriesTable.getModel();
+        tableModel.setNumRows(0);
+        
         CategoryModel categoryModel = new CategoryModel();
         Category[] categories       = categoryModel.all();
-        Object dados[] = new Object[2];
+        Object dados[] = new Object[3];
         
         for(int i = 0; i<categories.length; i++)
         {
-            dados[0] = categories[i].getName(); 
-            dados[1] = categories[i].getName();
+            dados[0] = categories[i].getId(); 
+            dados[1] = categories[i].getName();                                    
             
             tableModel.addRow(dados);
         }
         
+    }
+    public Categories() throws SQLException {
+        initComponents();
+        updateTable();       
         //CategoriesTable.setModel(tableModel);
         
     }
@@ -51,6 +63,12 @@ public class Categories extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         CategoriesTable = new javax.swing.JTable();
+        name = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        btnAdd = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
+        id = new javax.swing.JLabel();
+        Deletar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(576, 793));
@@ -60,14 +78,14 @@ public class Categories extends javax.swing.JFrame {
 
             },
             new String [] {
-                "id", "nome"
+                "id", "nome", "teste"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, true
+                false, true, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -80,25 +98,104 @@ public class Categories extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(CategoriesTable);
 
+        name.setToolTipText("");
+
+        jLabel1.setText("Nome");
+
+        btnAdd.setText("salvar");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+
+        btnReset.setText("Resetar");
+
+        id.setText("jLabel2");
+
+        Deletar.setText("delete");
+        Deletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeletarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(name)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 542, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(122, 122, 122)
+                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Deletar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnReset)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(192, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(id))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Deletar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        
+        String name             = this.name.getText();
+        CategoryValidator valid = new CategoryValidator(name);
+        CategoryModel category  = new CategoryModel();
+        
+        if(valid.isNameValid())
+        {
+            try {
+                
+                category.create(valid);
+                this.name.setText("");
+                updateTable();     
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(Categories.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void DeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeletarActionPerformed
+        // TODO add your handling code here:
+        int id = (int) CategoriesTable.getValueAt(CategoriesTable.getSelectedRow(),0);        
+        tableModel.removeRow(CategoriesTable.getSelectedRow());
+        System.out.println(id);
+                
+        
+    }//GEN-LAST:event_DeletarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,6 +238,12 @@ public class Categories extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable CategoriesTable;
+    private javax.swing.JButton Deletar;
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnReset;
+    private javax.swing.JLabel id;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField name;
     // End of variables declaration//GEN-END:variables
 }

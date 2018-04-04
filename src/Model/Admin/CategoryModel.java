@@ -18,6 +18,7 @@ import java.sql.SQLException;
  */
 public class CategoryModel extends Category{
     private String nameField = "name";
+    private String idField  = "id";
     
     public boolean create(Category c) throws SQLException
     {
@@ -63,7 +64,7 @@ public class CategoryModel extends Category{
             while(rs.next())
             {
                 Category category = new Category();
-                
+                category.setId(rs.getInt(idField));
                 category.setName(rs.getString(nameField));                                
                 c[i] = category;
                 i++;
@@ -96,7 +97,7 @@ public class CategoryModel extends Category{
             rs = stm.executeQuery();            
             rs.last();
             int total = rs.getRow();
-            System.out.println(total);
+            //System.out.println(total);
             c = new Category[total];
             
             rs.beforeFirst();            
@@ -105,6 +106,7 @@ public class CategoryModel extends Category{
             {
                 
                 Category category = new Category();
+                category.setId(rs.getInt(idField));
                 category.setName(rs.getString(nameField));                                
                 
                 c[i] = category;
