@@ -16,7 +16,7 @@ public class DataBaseFactory {
         switch(database)
         {
             case "SQLite":
-                return new SQLite();
+                return new SQLiteConnection();
             case "MySQL":
                 return new MySQL();
             default:

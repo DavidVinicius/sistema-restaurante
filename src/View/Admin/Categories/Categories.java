@@ -139,8 +139,7 @@ public class Categories extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(Deletar)
                         .addGap(18, 18, 18)
-                        .addComponent(btnReset)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btnReset)))
                 .addGap(19, 19, 19))
         );
         layout.setVerticalGroup(

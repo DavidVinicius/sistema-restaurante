@@ -125,8 +125,7 @@ public class Restaurant extends javax.swing.JFrame {
             c = CustomerModel.where("document", cpf);
             
             if(c != null)
-            {
-                System.out.println("Existe");
+            {                
                 Menu m = new Menu();
                 m.setVisible(true);
                 this.setVisible(false);
@@ -144,8 +143,7 @@ public class Restaurant extends javax.swing.JFrame {
                     if (senha != null) {
                         
                         if(senha.equals(admin.getPassword()) )
-                        {
-                            System.out.println("Logou");
+                        {                            
                             AdminPanel a = new AdminPanel();
                             a.setVisible(true);
                             this.dispose();
@@ -164,8 +162,7 @@ public class Restaurant extends javax.swing.JFrame {
                             if(senha != null)
                             {
                                 if(senha.equals(admin.getPassword()))
-                                {
-                                    System.out.println("logou");
+                                {                                    
                                     AdminPanel a = new AdminPanel();
                                     a.setVisible(true);
                                     //this.setVisible(false);
@@ -175,8 +172,7 @@ public class Restaurant extends javax.swing.JFrame {
                         }
                     }
                     
-                }else{
-                    System.out.println("Nao existe");
+                }else{                   
                     InsertCustomer insert = new InsertCustomer();
 
                     insert.setVisible(true);

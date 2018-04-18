@@ -6,6 +6,7 @@
 package Model.Admin;
 
 import Connections.ConnectionFactory;
+import Connections.SQLiteConnection;
 import Model.Customer;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,8 +27,9 @@ public class AdminModel extends Admin{
     public Admin find(String document) throws SQLException
     {
         Admin a = null;
-                
-        Connection con        = ConnectionFactory.getConnection();
+                        
+        SQLiteConnection sqlite = new SQLiteConnection();
+        Connection con          = sqlite.getConnection();
         PreparedStatement stm = null;
         ResultSet           rs = null;
         try{

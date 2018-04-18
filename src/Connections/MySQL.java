@@ -52,7 +52,7 @@ public class MySQL extends ConnectionDataBase {
                 return true;                               
             }
         } catch (SQLException ex) {            
-            Logger.getLogger(SQLite.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SQLiteConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         return false;
