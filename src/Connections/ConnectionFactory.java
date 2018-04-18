@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Connections;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 public class ConnectionFactory {
     
     private static final String DRIVER  = "com.mysql.jdbc.Driver";
-    private static final String URL     =   "jdbc:mysql://localhost:3306/lp3i3";
+    private static final String URL     =  "jdbc:mysql://localhost:3306/lp3i3";
     private static final String USER    = "root";
     private static final String PASS    = ""; // alterar senha
     

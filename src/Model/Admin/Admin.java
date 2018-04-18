@@ -10,7 +10,7 @@ package Model.Admin;
  * @author ht3000052
  */
 public class Admin {
-    protected String Table = "`admin`";
+    protected String Table = "`Admin`";
     protected String document;
     protected String password;
     

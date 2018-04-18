@@ -6,7 +6,7 @@ package ModelTest;
  * and open the template in the editor.
  */
 
-import Model.ConnectionFactory;
+import Connections.ConnectionFactory;
 import Model.Customer;
 import Model.CustomerModel;
 import java.sql.Connection;
@@ -16,6 +16,7 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -82,9 +83,21 @@ public class CustomerModelTest {
     }
     
     @Test
+    public void testMethodCreate() throws SQLException
+    {
+        Customer c = new Customer();
+        c.setName("Sara");
+        c.setEmail("email@email.com");
+        c.setPhone("123456789");
+        c.setDocument("789456123");
+        
+        assertTrue("Inseriu", CustomerModel.create(c));
+    }
+    
+    @Test
     public void testCountMethod() throws SQLException
     {
       int a = CustomerModel.count();
-        System.out.println(a);
+        //System.out.println(a);
     }
 }
