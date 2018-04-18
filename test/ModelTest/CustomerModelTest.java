@@ -6,7 +6,7 @@ package ModelTest;
  * and open the template in the editor.
  */
 
-import Model.ConnectionFactory;
+import Connections.ConnectionFactory;
 import Model.Customer;
 import Model.CustomerModel;
 import java.sql.Connection;
